@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,900;1,300;1,900&display=swap');
+@import '../src/variables.scss';
+
+* {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+#app-container {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+// Smart phones
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {}
+
+// MD and below
+@media screen and (max-width: 768px) {}
+
+#Footer--Container {
+  position: absolute;
+  bottom: 0.8em;
+  font-size: 0.7em;
+  width: 100%;
+  text-align: center;
+}
+
+.loader-app,
+.loader-app-text {
+  display: none;
+}
+
+code {
+  background-color: #eee;
+}
+
+pre {
+  background-color: #eee;
+  padding: 0.5em;
+  border: 1px solid rgb(216, 216, 216);
+}
