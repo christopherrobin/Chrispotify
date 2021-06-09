@@ -1,6 +1,6 @@
 export const authorizeUser = () => {
     var client_id = 'e62c3b933c404d649680716d3763bb6f';
-    var redirect_uri = 'http://localhost:3000/';
+    var redirect_uri = 'https://main.d3b0mjxumnwn6x.amplifyapp.com/';
 
     const generateRandomString = (length) => {
         var text = '';
