@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Helmet} from 'react-helmet';
-import { get } from 'lodash';
+import { has, get } from 'lodash';
 import { fetchIt } from '.././FetchUtils';
 import { Container, Row, Col } from 'reactstrap';
 import Header from '.././components/Header';
@@ -8,6 +8,8 @@ import AuthenticatedUserCard from '.././components/AuthenticatedUserCard';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Alert from '@material-ui/lab/Alert';
+
 import './LandingPage.scss';
 
 // Spotify specific functions
@@ -19,14 +21,13 @@ const LandingPage = () => {
     const accessToken = get(params, 'access_token', false);
 
     useEffect(() => {
-    fetchIt('https://api.spotify.com/v1/me', accessToken)
+        fetchIt('https://api.spotify.com/v1/me', accessToken)
         .then((result) => {
             setUserInfo(result);
         });
     }, []);
 
-    // console.log(UserInfo);
-    // console.log(accessToken);
+    const SpotifyAuthError = !has(UserInfo, 'display_name');
 
     return (
         <Container id="LandingPage--Container">
@@ -39,11 +40,23 @@ const LandingPage = () => {
                     <Card variant='outlined'>
                         <CardContent>
                             <Choose>
-                                <When condition={accessToken}>
+                                <When condition={accessToken && !SpotifyAuthError}>
                                     <AuthenticatedUserCard UserInfo={UserInfo}/>
                                 </When>
-                                {//<When condition={SpotifyAuthError}></When>
-                                }
+                                <When condition={accessToken && SpotifyAuthError}>
+                                    <Alert severity='error' style={{ marginBottom: '2em' }}>
+                                        There was an issue with your authorization, please try again.
+                                    </Alert>
+                                    <Button
+                                        onClick={() => authorizeUser()}
+                                        color='primary'
+                                        variant='contained'
+                                        disableElevation
+                                        fullWidth
+                                    >
+                                        Authorize Spotify
+                                    </Button>
+                                </When>
                                 <Otherwise>
                                 <h2>Hello!</h2>
                                 <p>Welcome to Chrispotify, a modern JS solution to implicit grant authorization.</p>

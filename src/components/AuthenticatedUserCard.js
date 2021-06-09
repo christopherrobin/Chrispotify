@@ -1,15 +1,29 @@
 import React from 'react';
+import { isString, get, map } from 'lodash';
 import { Container, Row, Col } from 'reactstrap';
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
 
 const AuthenticatedUserCard = (props) => {
     const { UserInfo } = props;
-    console.table(UserInfo);
+    const userAvatar = get(UserInfo, 'images[0].url', '');
     return (
-        <div>
-            <h2>Hello, {UserInfo.display_name}!</h2>
-        </div>
+        <Container>
+            <Row>
+                <Col xs={12}>
+                    <img style={{ border: '1px solid #666', marginBottom: '1em' }} src={userAvatar} alt='User Avatar from Spotify' />
+                    <h2>Hello, {UserInfo.display_name}!</h2></Col>
+                <Col xs={12}>
+                    <ul>
+                        {
+                            map(UserInfo, (value, key) =>  {
+                                if (isString(value)){
+                                    return <li key={key}><span className='key'>{key}:</span> {value}</li>;
+                                };
+                            })
+                        }
+                    </ul>
+                </Col>
+            </Row>
+        </Container>
 
     );
 };
