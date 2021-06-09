@@ -1,8 +1,7 @@
-export const get = (url) => {
-    const authHeader = 'Bearer - Token';
+export const fetchIt = (url, token) => {
 
     let myHeaders = new Headers();
-    myHeaders.append('Authorization', authHeader);
+    myHeaders.append('Authorization', `Bearer ${token}`);
 
     var requestOptions = {
       method: 'GET',
