@@ -1,4 +1,4 @@
-# React-Starter-Pack
+# Chrispotify
 
 This is my custom React Starter Pack, a constantly evolving collection of my favorite tools ready to be used to jump-start a new project. 
 

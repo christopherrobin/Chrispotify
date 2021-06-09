@@ -6,7 +6,7 @@ import './variables.scss';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#4884bd',
+      main: '#1DB954',
       contrastText: '#fff'
     },
     secondary: {
